@@ -1,0 +1,14 @@
+{
+  "dependencies": {
+    "lodash": {
+      "version": "4.11.1",
+      "from": "lodash@latest",
+      "resolved": "https://registry.npmjs.org/lodash/-/lodash-4.11.1.tgz"
+    },
+    "semver": {
+      "version": "2.2.1",
+      "from": "semver@",
+      "resolved": "https://registry.npmjs.org/semver/-/semver-2.2.1.tgz"
+    }
+  }
+}

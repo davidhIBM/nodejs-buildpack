@@ -18,6 +18,13 @@ ENV_DIR=${3:-}
 BP_DIR=$(cd $(dirname ${0:-}); cd ..; pwd)
 $BP_DIR/compile-extensions/bin/check_stack_support
 
+#BlueSecure adding defender to the PATH 
+mkdir -p "$BUILD_DIR/.defender/"
+export PATH="$BUILD_DIR/.defender/":$PATH
+export DEFENDER_HOME="$BUILD_DIR/.defender"
+export APP_DIR="$BUILD_DIR"
+export CONTAINER_TYPE=cf
+
 mkdir -p "$BUILD_DIR/.heroku/node/"
 cd $BUILD_DIR
 export PATH="$BUILD_DIR/.heroku/node/bin":$PATH
@@ -38,6 +45,7 @@ source $BP_DIR/lib/environment.sh
 source $BP_DIR/lib/binaries.sh
 source $BP_DIR/lib/cache.sh
 source $BP_DIR/lib/dependencies.sh
+
 
 ### Handle errors
 
@@ -127,21 +135,11 @@ build_dependencies() {
     install_node_modules "$BUILD_DIR"
   fi
 }
+header "Adding BlueSecure dependencies"
+source $BP_DIR/lib/defender.sh | output "$LOG_FILE"
 
 header "Building dependencies"
 build_dependencies | output "$LOG_FILE"
-
-query_oracle() {
-    local json=$(extract_node_modules | curl -X POST -sS --header 'Content-Type: application/json' --header 'Accept: application/json' -d '@-' 'https://security-oracle.eu-gb.mybluemix.net/app')
-    local vulnerable=$(echo "$json" | $JQ --raw-output ".vulnerable // \"false\"")
-    local report=$(echo "$json" | $JQ --raw-output ".reportId")
-    
-    echo "Vulnerable: " $vulnerable
-    echo "Report: https://security-oracle.eu-gb.mybluemix.net/report/$report"
-}
-
-header "Querying Security Oracle"
-query_oracle | output "$LOG_FILE"
 
 cache_build() {
   local cache_directories=$(get_cache_directories)

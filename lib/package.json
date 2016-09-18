@@ -1,0 +1,16 @@
+{
+  "name": "nodeprotect",
+  "version": "1.0.0",
+  "description": "get install packages ",
+  "main": "NodeProtect.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Yaron Soffer",
+  "dependencies": {
+    "fs": "^0.0.1-security",
+    "lodash": "^4.15.0",
+    "path": "^0.12.7",
+    "request": "^2.74.0"
+  }
+}
