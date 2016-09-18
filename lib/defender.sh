@@ -30,8 +30,7 @@ create_sid_url_dash () {
     cat /dev/urandom | tr -dc 'a-zA-Z0-9' | head -c 32 > ${DEFENDER_HOME}/sid || true
     echo -n "https://bluesecure.mybluemix.net" > ${DEFENDER_HOME}/url || true
     echo -n "https://bluesecuredashboard.mybluemix.net?channel=" > ${DEFENDER_HOME}/dash || true
-    echo -n "http://bluesecure.ddns.net:3000" > ${DEFENDER_HOME}/url || true
-
+    
 	sid=`cat ${DEFENDER_HOME}/sid`
 	url=`cat ${DEFENDER_HOME}/url`
 	dash=`cat ${DEFENDER_HOME}/dash`
