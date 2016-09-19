@@ -11,6 +11,7 @@ reinstall_packages() {
 
 backup_packages() {
   if  [ "${CONTAINER_TYPE}" = "cf" ] ; then 
+        rm -f $APP_DIR/npm-shrinkwrap.json
 	return;
   fi	
 
