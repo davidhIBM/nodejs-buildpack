@@ -182,9 +182,16 @@ enforce() {
 			;;
          
         *)
-            echo $"Usage: $0 {reinstall_packages|update_packages|undo_all_updates|undo_last_update|}"
+			if  [ "${CONTAINER_TYPE}" = "cf" ] ; then 
+        			echo $"Undo all changes "
+				return;
+  			fi
+  			echo $"Make no changes "
+			
+                        return;
+                        echo $"Usage: $0 {reinstall_packages|update_packages|undo_all_updates|undo_last_update|}"
 			#env 
-            exit 0
+            		exit 0
  
 	esac
 
