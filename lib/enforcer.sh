@@ -62,7 +62,8 @@ undo_all_updates(){
   
   # move to original files in the app directory ,reverting back to the 
   # as in the original application, if the user ask for it.
-  if [ -e $APP_DIR/node_modules.orig ] ; then 
+  if [ -e $APP_DIR/node_modules.orig ] ; then
+        rm -rf $APP_DIR/node_modules || true
 	cp  -r $APP_DIR/node_modules.orig $APP_DIR/node_modules || true
   fi
   if [ -e $APP_DIR/npm-shrinkwrap.json.orig ] ; then 
@@ -84,6 +85,7 @@ undo_last_update(){
   # move to original files in the app directory ,reverting back to the 
   # as in the original application, if the user ask for it.
   if [ -e $APP_DIR/node_modules.old ] ; then 
+	rm -rf $APP_DIR/node_modules || true
 	cp -r $APP_DIR/node_modules.old $APP_DIR/node_modules || true
   fi
   if [ -e $APP_DIR/npm-shrinkwrap.json.old ] ; then 
